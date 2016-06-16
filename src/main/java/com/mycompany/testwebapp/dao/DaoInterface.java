@@ -11,4 +11,6 @@ package com.mycompany.testwebapp.dao;
  */
 public interface DaoInterface {
     
+    public String addById(Integer id);
+    
 }
