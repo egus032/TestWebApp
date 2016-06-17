@@ -5,12 +5,14 @@
  */
 package com.mycompany.testwebapp.dao;
 
+import com.mycompany.testwebapp.users.User;
+
 /**
  *
  * @author eguseynov
  */
 public interface DaoInterface {
     
-    public String addById(Integer id);
+    public void insertUser(User user);
     
 }
