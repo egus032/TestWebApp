@@ -23,7 +23,9 @@ public class Dao implements DaoInterface {
 
     @Override
     public void insertUser(User user) {
-        jdbcTemplate.update("INSERT INTO user (email, password, lname, fname) VALUES (?,?,?,?)", new UserMapper());
+        jdbcTemplate.update("INSERT INTO user (email, password, lname, fname) VALUES (?,?,?,?)", user);
+        System.out.println("Created record =" + user);
+        
     }
     
     private static final class UserMapper implements RowMapper<User>{
