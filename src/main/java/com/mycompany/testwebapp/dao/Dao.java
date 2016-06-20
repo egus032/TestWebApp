@@ -4,6 +4,7 @@ package com.mycompany.testwebapp.dao;
 import com.mycompany.testwebapp.users.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -14,35 +15,41 @@ import org.springframework.jdbc.core.RowMapper;
  * @author eguseynov
  */
 public class Dao implements DaoInterface {
-    
-    private JdbcTemplate jdbcTemplate;
-    
-    public void setDataSource(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+
+    @Override
+    public List<User> findAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void insertUser(User user) {
-        jdbcTemplate.update("INSERT INTO user (email, password, lname, fname) VALUES (?,?,?,?)", user);
-        System.out.println("Created record =" + user);
-        
+    public List<User> findByFirstName(String firstName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    private static final class UserMapper implements RowMapper<User>{
 
-        @Override
-        public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-            User user = new User();
-            user.setId(rs.getInt("id"));
-            user.setEmail(rs.getString("email"));
-            user.setLastName(rs.getString("lname"));
-            user.setFirstName(rs.getString("fname"));
-            return user;
-        }
-        
-        
+    @Override
+    public String findLastNameByid(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    public String findFirstNameByid(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void insert(User user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void update(User user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
     

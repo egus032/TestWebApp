@@ -1,6 +1,8 @@
 
 package com.mycompany.testwebapp.users;
 
+import java.util.List;
+
 /**
  *
  * @author eguseynov
@@ -8,37 +10,15 @@ package com.mycompany.testwebapp.users;
 // This fields need to match with columns in table User, but table User must contain also another columns
 public class User {
     
-    
-    
     private Integer id;
     
     private String email;
     
-    private String password;
+    private String lname;
     
-    private String lastName;
+    private String fname;
     
-    private String firstName;
-    
-    
-
-    
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    private List<UserInfo> userInfo;
 
     public Integer getId() {
         return id;
@@ -56,15 +36,36 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getLname() {
+        return lname;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setLname(String lname) {
+        this.lname = lname;
     }
-    
-    
-    
+
+    public String getFname() {
+        return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public List<UserInfo> getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(List<UserInfo> userInfo) {
+        this.userInfo = userInfo;
+    }
+    @Override
+    public String toString(){
+        return "User {" + "id=" + id 
+                + ", emai=" + email 
+                + ", lname" + lname 
+                + ", fname" + fname 
+                + "}";
+    }
     
 }

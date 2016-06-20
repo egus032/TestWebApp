@@ -1,8 +1,6 @@
 
 package com.mycompany.testwebapp.users;
 
-import java.util.Date;
-
 /**
  *
  * @author eguseynov
@@ -11,36 +9,41 @@ import java.util.Date;
 // This class is designed for giving additional information from table User
 public class UserInfo {
     
-    private Date regDay;
+    private Integer id;
     
-    private Date lastVisitUser;
-
-
-    public Date getRegDay() {
-        return regDay;
-    }
+    private String telType;
     
-    public UserInfo(Date regDay, Date lastVisitUser) {
-        this.regDay = regDay;
-        this.lastVisitUser = lastVisitUser;
+    private String telNumber;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setRegDay(Date regDay) {
-        this.regDay = regDay;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Date getLastVisitUser() {
-        return lastVisitUser;
+    public String getTelType() {
+        return telType;
     }
 
-    public void setLastVisitUser(Date lastVisitUser) {
-        this.lastVisitUser = lastVisitUser;
+    public void setTelType(String telType) {
+        this.telType = telType;
+    }
+
+    public String getTelNumber() {
+        return telNumber;
+    }
+
+    public void setTelNumber(String telNumber) {
+        this.telNumber = telNumber;
     }
     
-    public boolean ifEmpty(){
-        return this.regDay == null || this.lastVisitUser == null;
+    public String toString(){
+        return "UserInfo {" + "id=" + id 
+                + ", telType=" + telType
+                + ", telNumber=" + telNumber
+                + "}";
     }
-    
-    
     
 }

@@ -6,6 +6,7 @@
 package com.mycompany.testwebapp.dao;
 
 import com.mycompany.testwebapp.users.User;
+import java.util.List;
 
 /**
  *
@@ -13,6 +14,11 @@ import com.mycompany.testwebapp.users.User;
  */
 public interface DaoInterface {
     
-    public void insertUser(User user);
-    
+    public List<User> findAll();
+    public List<User> findByFirstName(String firstName);
+    public String findLastNameByid(Integer id);
+    public String findFirstNameByid(Integer id);
+    public void insert(User user);
+    public void update(User user);
+    public void delete(Integer id);
 }
