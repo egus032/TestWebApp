@@ -28,7 +28,7 @@ public class User {
         this.id = id;
     }
 
-    public String getEmail() {
+    public String getEmail(String email) {
         return email;
     }
 
@@ -36,7 +36,7 @@ public class User {
         this.email = email;
     }
 
-    public String getLname() {
+    public String getLname(String lname) {
         return lname;
     }
 
@@ -44,7 +44,7 @@ public class User {
         this.lname = lname;
     }
 
-    public String getFname() {
+    public String getFname(String fname) {
         return fname;
     }
 
@@ -61,10 +61,10 @@ public class User {
     }
     @Override
     public String toString(){
-        return "User {" + "id=" + id 
-                + ", emai=" + email 
-                + ", lname" + lname 
-                + ", fname" + fname 
+        return "User {" + "id = " + id 
+                + ", emai = " + email 
+                + ", lname = " + lname 
+                + ", fname= " + fname 
                 + "}";
     }
     

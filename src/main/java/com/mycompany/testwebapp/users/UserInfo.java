@@ -11,6 +11,8 @@ public class UserInfo {
     
     private Integer id;
     
+    private Integer idUserInfo;
+    
     private String telType;
     
     private String telNumber;
@@ -38,11 +40,21 @@ public class UserInfo {
     public void setTelNumber(String telNumber) {
         this.telNumber = telNumber;
     }
+
+    public Integer getIdUserInfo() {
+        return idUserInfo;
+    }
+
+    public void setIdUserInfo(Integer idUserInfo) {
+        this.idUserInfo = idUserInfo;
+    }
+    
     
     public String toString(){
-        return "UserInfo {" + "id=" + id 
-                + ", telType=" + telType
-                + ", telNumber=" + telNumber
+        return "UserInfo {" + "id = " + id 
+                //+ ", id_user_info = " + idUserInfo
+                + ", telType = " + telType
+                + ", telNumber = " + telNumber
                 + "}";
     }
     
