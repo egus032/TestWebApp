@@ -22,14 +22,14 @@ public class MainApp {
         /*
         создаем объект список с параметрами User через вызов 
         метода на объекте dao
-        */
+        
         List<User> userWithDetail = dao.findAllInfoInBothTable();
         
-        /*
+        
         в цикле перебираем сначала объект user и выводим на печать,
         после проверяем, если каждый из созданных объктов user.getUserInfo
         существует, то в цикле выводим объекты userInfo
-        */        
+              
         for (User user : userWithDetail) {
             
             System.out.println(user);
@@ -41,7 +41,7 @@ public class MainApp {
             }
             System.out.println();
         }
-      
+      */
     }
 
     
