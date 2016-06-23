@@ -23,22 +23,22 @@ public class MainApp {
         в параметры передаем метод findAllWithDetail(), возвращаюший
         объект в виде списка User, а метод listUser его итерирует по условиям
         */
-        listUsers(daoInterface.findAllWithDetail());
+        
         // сначала создадим объект user
         User user = new User();
         // заполним все его поля через сеттеры
-        user.setEmail("michael@pop.ru");
-        user.setLname("Bolton");
-        user.setFname("Michael");
+        user.setEmail("jackson@power.ru");
+        user.setLname("Jackson");
+        user.setFname("Cane");
         
         //теперь создадим объект userInfo, т.к. у него есть переопределенный
         // конструктор, вызываем сразу его
-        UserInfo userInfo = new UserInfo("Mobile", "555-55-55");
+        UserInfo userInfo = new UserInfo("Mobile", "551-52-52");
         // добавим этот объект к объекту user
         user.addUserInfo(userInfo);
         // можем переопределить поля объекта userInfo
-        //userInfo = new UserInfo("Home", "123-00-12");
-        //user.addUserInfo(userInfo);
+        userInfo = new UserInfo("Home", "103-10-22");
+        user.addUserInfo(userInfo);
         
         
         daoInterface.save(user);
@@ -48,6 +48,7 @@ public class MainApp {
         System.out.println("");
         System.out.println("User with id 2: " + user);
         */
+        listUsers(daoInterface.findAllWithDetail());
     }
     
     /*

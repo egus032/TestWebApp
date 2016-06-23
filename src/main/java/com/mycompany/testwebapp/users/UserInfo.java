@@ -20,7 +20,7 @@ import javax.persistence.Version;
 
 // This class is designed for giving additional information from table User
 @Entity
-@Table(name="user_info")
+@Table(name="user_info_detail")
 public class UserInfo implements Serializable {
     
     private Integer id;
@@ -83,7 +83,7 @@ public class UserInfo implements Serializable {
     }
     
     @ManyToOne
-    @JoinColumn(name = "id_user_info")
+    @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
     }
