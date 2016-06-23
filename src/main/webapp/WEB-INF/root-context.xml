@@ -17,7 +17,7 @@
                 http://www.springframework.org/schema/util/spring-util-3.2.xsd
                 ">
 
-    
+    <context:annotation-config/>
     
     <!--это источник данных-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -29,6 +29,7 @@
         <property name="maxActive" value="5" />
     </bean>
     
+          
     <!--диспетчер транзакций,  -->
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>

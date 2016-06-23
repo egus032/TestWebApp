@@ -14,13 +14,10 @@ import java.util.List;
  */
 public interface DaoInterface {
     
+    public User save(User user);
+    public void delete(User user);
+    public User findById(Integer id);
     public List<User> findAll();
-    public List<User> findByFirstName(String firstName);
-    public String findLastNameByid(Integer id);
-    public String findFirstNameByid(Integer id);
-    public void insert(User user);
-    public void update(User user);
-    public void delete(Integer id);
+    public List<User> findAllWithDetail();
     
-    public List<User> findAllInfoInBothTable();
 }
