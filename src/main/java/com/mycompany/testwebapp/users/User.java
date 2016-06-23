@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 /**
  *
@@ -24,6 +26,17 @@ import javax.persistence.Version;
 // This fields need to match with columns in table User, but table User must contain also another columns
 @Entity
 @Table(name = "user")
+/* 
+особое внимание составлению для NamedQuery точнее User должно быт с Большой буквы,
+в строке запросоd используются userInfo из Set<UserInfo> userInfo, 
+hobbies Set<Hobby> hobbies
+*/
+@NamedQueries({
+@NamedQuery (name = "User.findById", query = "SELECT DISTINCT c FROM User c LEFT JOIN FETCH"
+        + " c.userInfo t LEFT JOIN FETCH c.hobbies h WHERE c.id = :id"),    
+@NamedQuery (name = "User.findAllWithDetail", query = "SELECT DISTINCT c FROM User c LEFT JOIN FETCH"
+        + " c.userInfo t LEFT JOIN FETCH c.hobbies h")
+})
 public class User implements Serializable {
     
     private Integer id;
@@ -41,7 +54,7 @@ public class User implements Serializable {
     private Set<Hobby> hobbies = new HashSet<Hobby>();
     
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = IDENTITY) // устанавливает id автоматически
     @Column(name = "id")
     public Integer getId() {
         return id;
@@ -109,8 +122,12 @@ public class User implements Serializable {
         this.hobbies = hobbies;
     }
     
-    
-    
+    /*
+    этот метод отвечает за добавление объекта userInfo к объекту user,
+    сначала устанавливая какой это user
+    затем вызывается метод getUserInfo, который пробегает по таблице
+    после добавляет userInfo в нужное место
+    */
     public void addUserInfo(UserInfo userInfo){
         userInfo.setUser(this);
         getUserInfo().add(userInfo);

@@ -37,7 +37,9 @@ public class Dao implements DaoInterface {
 
     @Override
     public User save(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        sessionFactory.getCurrentSession().saveOrUpdate(user);
+        log.info("User saved by id: " + user.getId());
+        return user;
     }
 
     @Override
@@ -46,8 +48,10 @@ public class Dao implements DaoInterface {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User findById(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (User) sessionFactory.getCurrentSession().getNamedQuery("User.findById").
+                setParameter("id", id).uniqueResult();
     }
     
     @Override
@@ -57,8 +61,9 @@ public class Dao implements DaoInterface {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> findAllWithDetail() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return sessionFactory.getCurrentSession().getNamedQuery("User.findAllWithDetail").list();
     }
     
     
