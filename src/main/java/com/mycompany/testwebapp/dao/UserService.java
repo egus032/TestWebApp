@@ -12,11 +12,12 @@ import java.util.List;
  *
  * @author eguseynov
  */
-public interface DaoInterface {
+public interface UserService {
     
     public User save(User user);
     public void delete(User user);
     public User findById(Integer id);
+    public List<User> findByLastName(String lastName);
     public List<User> findAll();
     public List<User> findAllWithDetail();
     

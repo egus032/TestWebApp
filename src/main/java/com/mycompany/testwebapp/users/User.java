@@ -16,8 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
-import org.hibernate.annotations.NamedQueries;
-import org.hibernate.annotations.NamedQuery;
+import org.exolab.castor.types.DateTime;
+import org.hibernate.annotations.Type;
 
 /**
  *
@@ -26,17 +26,6 @@ import org.hibernate.annotations.NamedQuery;
 // This fields need to match with columns in table User, but table User must contain also another columns
 @Entity
 @Table(name = "user")
-/* 
-особое внимание составлению для NamedQuery точнее User должно быт с Большой буквы,
-в строке запросоd используются userInfo из Set<UserInfo> userInfo, 
-hobbies Set<Hobby> hobbies
-*/
-@NamedQueries({
-@NamedQuery (name = "User.findById", query = "SELECT DISTINCT c FROM User c LEFT JOIN FETCH"
-        + " c.userInfo t LEFT JOIN FETCH c.hobbies h WHERE c.id = :id"),    
-@NamedQuery (name = "User.findAllWithDetail", query = "SELECT DISTINCT c FROM User c LEFT JOIN FETCH"
-        + " c.userInfo t LEFT JOIN FETCH c.hobbies h")
-})
 public class User implements Serializable {
     
     private Integer id;
@@ -48,6 +37,8 @@ public class User implements Serializable {
     private String lname;
     
     private String fname;
+    
+    private DateTime birthDate;
     
     private Set<UserInfo> userInfo = new HashSet<UserInfo>();
     
@@ -90,6 +81,17 @@ public class User implements Serializable {
     public void setFname(String fname) {
         this.fname = fname;
     }
+    
+    @Column(name = "birth_date")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    public DateTime getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(DateTime birthDate) {
+        this.birthDate = birthDate;
+    }
+    
     
     @Version
     @Column(name = "version")
@@ -137,13 +139,13 @@ public class User implements Serializable {
         getUserInfo().remove(userInfo);
     }
     
-    
     @Override
     public String toString(){
         return "User {" + "id = " + id 
                 + ", emai = " + email 
                 + ", lname = " + lname 
                 + ", fname= " + fname 
+                + ", birthDate= " + birthDate 
                 + "}";
     }
     

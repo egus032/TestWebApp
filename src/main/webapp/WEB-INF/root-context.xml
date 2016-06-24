@@ -4,6 +4,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans 
                 http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
@@ -13,9 +14,11 @@
                 http://www.springframework.org/schema/context/spring-context-4.3.xsd
                 http://www.springframework.org/schema/task
                 http://www.springframework.org/schema/task/spring-task-3.2.xsd
+                http://www.springframework.org/schema/data/jpa
+                http://www.springframework.org/schema/data/jpa/spring-jpa-1.10.xsd
                 http://www.springframework.org/schema/util
-                http://www.springframework.org/schema/util/spring-util-3.2.xsd
-                ">
+                http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+                
 
     <context:annotation-config/>
     
@@ -30,25 +33,42 @@
     </bean>
     
           
-    <!--диспетчер транзакций,  -->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"/>
+    <!--диспетчер транзакций, меняется класс и ссылка на свойства  -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="emf"/>
     </bean>
     
-    <tx:annotation-driven/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
     
     <context:component-scan base-package="com.mycompany.testwebapp"/>
       
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+        <!-- Добавляем новое свойство поставщика jpaAdaptera и добавляем jpaProperties -->
+        <property name="jpaVendorAdapter"> 
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
         <property name="packagesToScan" value="com.mycompany.testwebapp"/>
-        <property name="hibernateProperties">
+        <property name="jpaProperties">
             <value>
                 hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
             </value> 
         </property>
     </bean>
-            
+    
+    <!--указываем репозиторий jpa и два доп.элемента -->
+    <jpa:repositories base-package="com.mycompany.testwebapp"
+                      entity-manager-factory-ref="emf"
+                      transaction-manager-ref="transactionManager"/>
+    
+    <!--здесь создаем бин http инициатора, который отправляет либой бин Spring как службу-->
+    <bean id="userExporter" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <!--имя бина и ссылка на сервис, т.е. на бин класса-->
+        <property name="service" ref="userService"/>
+        <!--имя бина и тип бина, представляющего собой интерфейс предыдущего бина выше -->
+        <property name="serviceInterface" value="com.mycompany.testwebapp.dao.UserService"/> 
+    </bean>
+    
        
     
 

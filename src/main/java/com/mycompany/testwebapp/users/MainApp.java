@@ -1,8 +1,8 @@
 
 package com.mycompany.testwebapp.users;
 
-import com.mycompany.testwebapp.dao.Dao;
-import com.mycompany.testwebapp.dao.DaoInterface;
+import com.mycompany.testwebapp.dao.UserServiceImplementation;
+import com.mycompany.testwebapp.dao.UserService;
 import java.util.List;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
@@ -17,38 +17,8 @@ public class MainApp {
         GenericXmlApplicationContext gx = new GenericXmlApplicationContext();
         gx.load("file:/Users/eguseynov/Documents/NetBeansProjects/TestWebApp/src/main/webapp/WEB-INF/root-context.xml");
         gx.refresh();
-        DaoInterface daoInterface = gx.getBean("daoInterface", DaoInterface.class);
-        /*
-        в этом методе выводится в консоль значения, переданные в параметрах,
-        в параметры передаем метод findAllWithDetail(), возвращаюший
-        объект в виде списка User, а метод listUser его итерирует по условиям
-        */
-        
-        // сначала создадим объект user
-        User user = new User();
-        // заполним все его поля через сеттеры
-        user.setEmail("jackson@power.ru");
-        user.setLname("Jackson");
-        user.setFname("Cane");
-        
-        //теперь создадим объект userInfo, т.к. у него есть переопределенный
-        // конструктор, вызываем сразу его
-        UserInfo userInfo = new UserInfo("Mobile", "551-52-52");
-        // добавим этот объект к объекту user
-        user.addUserInfo(userInfo);
-        // можем переопределить поля объекта userInfo
-        userInfo = new UserInfo("Home", "103-10-22");
-        user.addUserInfo(userInfo);
-        
-        
-        daoInterface.save(user);
-        
-        /* Это из предудущей версии
-        User user = daoInterface.findById(2);
-        System.out.println("");
-        System.out.println("User with id 2: " + user);
-        */
-        listUsers(daoInterface.findAllWithDetail());
+        UserService userService = gx.getBean("userService", UserService.class);
+        listUsers(userService.findAllWithDetail());
     }
     
     /*
