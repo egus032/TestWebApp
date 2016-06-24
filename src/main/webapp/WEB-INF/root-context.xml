@@ -18,8 +18,8 @@
                 ">
                 
                 
-
-    
+                
+    <context:component-scan base-package="com.mycompany.testwebapp"/>
     
     <!--это источник данных-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -31,10 +31,14 @@
         <property name="maxActive" value="5" />
     </bean>
     
-    <context:component-scan base-package="com.mycompany.testwebapp"/>
+    
     
     <tx:annotation-driven transaction-manager="transactionManager"/>
     
+    <!--диспетчер транзакций, меняется класс и ссылка на свойства  -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="emf"/>
+    </bean>
       
     <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
@@ -50,18 +54,13 @@
         </property>
     </bean>
     
-    <!--диспетчер транзакций, меняется класс и ссылка на свойства  -->
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="emf"/>
-    </bean>
-    
     <!--указываем репозиторий jpa и два доп.элемента -->
     <jpa:repositories base-package="com.mycompany.testwebapp"
                       entity-manager-factory-ref="emf"
                       transaction-manager-ref="transactionManager"/>
     
     <!--здесь создаем бин http инициатора, который отправляет либой бин Spring как службу-->
-    <bean id="userExporter" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+    <bean name="userExporter" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
         <!--имя бина и ссылка на сервис, т.е. на бин класса-->
         <property name="service" ref="userService"/>
         <!--имя бина и тип бина, представляющего собой интерфейс предыдущего бина выше -->

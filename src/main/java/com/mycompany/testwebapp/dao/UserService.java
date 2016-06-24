@@ -19,6 +19,6 @@ public interface UserService {
     public User findById(Integer id);
     public List<User> findByLastName(String lastName);
     public List<User> findAll();
-    public List<User> findAllWithDetail();
+    
     
 }

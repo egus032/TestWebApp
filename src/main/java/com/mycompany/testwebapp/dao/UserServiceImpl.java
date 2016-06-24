@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.mycompany.testwebapp.users.User;
 import com.mycompany.testwebapp.users.UserRepository;
 import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
 в оригинале он называется UserService
 */
 @Service("userService")
-@Repository
 @Transactional
-public class UserServiceImplementation implements UserService {
-    
+public class UserServiceImpl implements UserService {
+
     
     /*
     этот объект дает доступ к CRUD методам для операций с объектом user, 
@@ -64,12 +64,7 @@ public class UserServiceImplementation implements UserService {
         return Lists.newArrayList(userRepository.findAll());
     }
 
-    @Override
-    public List<User> findAllWithDetail() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
+        
     
 }
     

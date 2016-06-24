@@ -36,13 +36,13 @@ public class User implements Serializable {
     
     private String lname;
     
+    private String lastName;
+    
     private String fname;
     
     private DateTime birthDate;
     
-    private Set<UserInfo> userInfo = new HashSet<UserInfo>();
     
-    private Set<Hobby> hobbies = new HashSet<Hobby>();
     
     @Id
     @GeneratedValue(strategy = IDENTITY) // устанавливает id автоматически
@@ -103,42 +103,16 @@ public class User implements Serializable {
         this.version = version;
     }
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    public Set<UserInfo> getUserInfo() {
-        return userInfo;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setUserInfo(Set<UserInfo> userInfo) {
-        this.userInfo = userInfo;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
     
-    @ManyToMany
-    @JoinTable(name = "hobby_detail", 
-            joinColumns = @JoinColumn(name = "user_id"), 
-            inverseJoinColumns = @JoinColumn (name = "hobby_id") )
-    public Set<Hobby> getHobbies() {
-        return hobbies;
-    }
+    
 
-    public void setHobbies(Set<Hobby> hobbies) {
-        this.hobbies = hobbies;
-    }
-    
-    /*
-    этот метод отвечает за добавление объекта userInfo к объекту user,
-    сначала устанавливая какой это user
-    затем вызывается метод getUserInfo, который пробегает по таблице
-    после добавляет userInfo в нужное место
-    */
-    public void addUserInfo(UserInfo userInfo){
-        userInfo.setUser(this);
-        getUserInfo().add(userInfo);
-    }
-    
-    public  void removeUserInfo(UserInfo userInfo){
-        getUserInfo().remove(userInfo);
-    }
-    
     @Override
     public String toString(){
         return "User {" + "id = " + id 
