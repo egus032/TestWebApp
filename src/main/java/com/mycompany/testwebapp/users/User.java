@@ -16,7 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
-import org.exolab.castor.types.DateTime;
+import org.joda.time.DateTime;
 import org.hibernate.annotations.Type;
 
 /**
@@ -34,7 +34,7 @@ public class User implements Serializable {
 
     private String email;
     
-    private String lname;
+    //private String lname;
     
     private String lastName;
     
@@ -64,6 +64,7 @@ public class User implements Serializable {
         this.email = email;
     }
     
+    /*
     @Column(name="lname")
     public String getLname() {
         return lname;
@@ -72,6 +73,7 @@ public class User implements Serializable {
     public void setLname(String lname) {
         this.lname = lname;
     }
+    */
     
     @Column(name = "fname")
     public String getFname() {
@@ -102,7 +104,8 @@ public class User implements Serializable {
     public void setVersion(Integer version) {
         this.version = version;
     }
-
+    
+    @Column(name="lname")
     public String getLastName() {
         return lastName;
     }
@@ -117,7 +120,7 @@ public class User implements Serializable {
     public String toString(){
         return "User {" + "id = " + id 
                 + ", emai = " + email 
-                + ", lname = " + lname 
+                + ", lname = " + lastName
                 + ", fname= " + fname 
                 + ", birthDate= " + birthDate 
                 + "}";

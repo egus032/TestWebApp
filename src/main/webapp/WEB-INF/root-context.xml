@@ -67,6 +67,12 @@
         <property name="serviceInterface" value="com.mycompany.testwebapp.dao.UserService"/> 
     </bean>
     
+    <!--специальный бин-->
+    <bean id="remoteUserService" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl" value="http://localhost:8081/TestWebApp/remoting/UserService"/>
+        <property name="serviceInterface" value="com.mycompany.testwebapp.dao.UserService"/>
+    </bean>
+    
        
     
 
