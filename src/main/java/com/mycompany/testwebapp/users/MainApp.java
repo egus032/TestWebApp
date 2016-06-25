@@ -16,8 +16,16 @@ public class MainApp {
         GenericXmlApplicationContext gx = new GenericXmlApplicationContext();
         gx.load("file:/Users/eguseynov/Documents/NetBeansProjects/TestWebApp/src/main/webapp/WEB-INF/root-context.xml");
         gx.refresh();
+        /*
+        создаем экзмепляр интерфейса через вызов бина по названию в строке и
+        по определению класса в следующем параметре
+        */
         UserService userService = gx.getBean("remoteUserService", UserService.class);
         System.out.println("Finding all contacts:");
+        /*
+        создаем список users используя вызов метода через объект, т.к. интерфейс
+        свои методы не реализует, то он обращается к классу имплементу
+        */
         List<User> users = userService.findAll();
         listUsers(users);
         
