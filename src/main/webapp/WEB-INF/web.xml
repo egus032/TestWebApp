@@ -5,29 +5,21 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
                              http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
         
-        <display-name>Spring НТТР Invoker Sample</display-name>
         
-        <context-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/root-context.xml</param-value>
-        </context-param>
         
-        <listener>
-            <listener-class>
-                org.springframework.web.context.ContextLoaderListener
-            </listener-class>
-        </listener>
-        
-        <!--заменен класс DispatherServlet на этот -->
-        <!--здесь настройка сервлета, плюс добавил servlet api в pom.xml-->
         <servlet>
-            <servlet-name>userExporter</servlet-name>
-            <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+            <servlet-name>TestWebApp</servlet-name>
+            <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+            <init-param>
+                <param-name>contextConfigLocation</param-name>
+                <param-value>/WEB-INF/root-context.xml</param-value>
+            </init-param>
+            <load-on-startup>1</load-on-startup>
         </servlet>
         
         <servlet-mapping>
-            <servlet-name>userExporter</servlet-name>
-            <url-pattern>/remoting/UserService</url-pattern>
+            <servlet-name>TestWebApp</servlet-name>
+            <url-pattern>/TestWebApp/*</url-pattern>
         </servlet-mapping>
         
         

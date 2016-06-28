@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <mapping>
+        <class name="com.mycompany.testwebapp.users.Users">
+            <field name="users" type="com.mycompany.testwebapp.users.User" collection="arraylist">
+            <bind-xml name="user"/>
+        </field>
+        </class>
+        
+        <class name="com.mycompany.testwebapp.users.User" identity="id">
+            <map-to xml="user" />
+                <field name="id" type="integer">
+                <bind-xml name="id" node="element"/>
+                </field>
+                <field name="email" type="string">
+                <bind-xml name="email" node="element"/>
+                </field>
+                <field name="lastName" type="string">
+                <bind-xml name="lastName" node="element" />
+                </field>
+                <field name="fname" type="string">
+                <bind-xml name="fname" node="element" />
+                </field>
+                <field name="birthDate" type="string" handler="dateHandler">
+                <bind-xml name="birthDate" node="element" />
+                </field>
+                <field name="version" type="integer">
+                <bind-xml name="version" node="element" />
+                </field>
+        </class>
+        <field-handler name="dateHandler" class="com.mycompany.testwebapp.users.DateTimeFieldHandler">
+                <param name="date-format" value="yyyy-ММ-dd" />
+        </field-handler>
+    </mapping>
